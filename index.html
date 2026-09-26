@@ -4,900 +4,1338 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SkillShare — Share Your Skills, Learn From Others</title>
+    <title>SkillShare - Share Your Skills</title>
 
-    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- ================= LOGIN PAGE ================= -->
+<!-- =========================================================
+     TOAST
+========================================================= -->
 
-    <section id="loginPage" class="login-page">
+<div id="toastContainer" class="toast-container"></div>
 
-        <div class="background-shape shape-one"></div>
-        <div class="background-shape shape-two"></div>
-        <div class="background-shape shape-three"></div>
 
-        <div class="login-card">
+<!-- =========================================================
+     AUTHENTICATION
+========================================================= -->
 
-            <div class="logo login-logo">
-                <div class="logo-icon">
-                    <i class="fa-solid fa-share-nodes"></i>
+<section id="authScreen" class="auth-screen">
+
+    <div class="auth-brand-panel">
+
+        <div class="brand-logo large-logo">
+            <div class="logo-icon">S</div>
+            <span>Skill<span>Share</span></span>
+        </div>
+
+        <div class="brand-content">
+
+            <span class="brand-badge">LEARN • SHARE • CONNECT</span>
+
+            <h1>
+                Share what you know.
+                <span>Learn something new.</span>
+            </h1>
+
+            <p>
+                Connect with people, discover useful skills,
+                and build your learning network with SkillShare.
+            </p>
+
+            <div class="brand-features">
+
+                <div class="brand-feature">
+                    <div class="feature-icon">✦</div>
+                    <div>
+                        <strong>Discover Skills</strong>
+                        <small>Explore skills shared by learners.</small>
+                    </div>
                 </div>
-                <span>SkillShare</span>
+
+                <div class="brand-feature">
+                    <div class="feature-icon">↗</div>
+                    <div>
+                        <strong>Share Knowledge</strong>
+                        <small>Teach others what you know.</small>
+                    </div>
+                </div>
+
+                <div class="brand-feature">
+                    <div class="feature-icon">◎</div>
+                    <div>
+                        <strong>Build Connections</strong>
+                        <small>Connect with like-minded people.</small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="brand-footer">
+            <span>SkillShare</span>
+            <span>•</span>
+            <span>Learn together. Grow together.</span>
+        </div>
+
+    </div>
+
+
+    <div class="auth-form-panel">
+
+        <div class="auth-card">
+
+            <div class="mobile-brand">
+                <div class="logo-icon">S</div>
+                <span>Skill<span>Share</span></span>
             </div>
 
-            <div class="login-heading">
-                <h1>Welcome back 👋</h1>
-                <p>Share your skills. Learn from others.</p>
+            <div class="auth-heading">
+                <span class="welcome-label">WELCOME TO SKILLSHARE</span>
+                <h2 id="authTitle">Create your account</h2>
+                <p id="authSubtitle">
+                    Start sharing your skills with others.
+                </p>
             </div>
 
-            <form id="loginForm">
 
-                <div class="input-group">
-                    <label for="loginEmail">Email</label>
+            <!-- AUTH TABS -->
 
-                    <div class="input-wrapper">
-                        <i class="fa-regular fa-envelope"></i>
-                        <input
-                            type="email"
-                            id="loginEmail"
-                            placeholder="Enter your email"
-                        >
+            <div class="auth-tabs">
+
+                <button
+                    id="signUpTab"
+                    class="auth-tab active"
+                    onclick="showSignUp()"
+                >
+                    Sign Up
+                </button>
+
+                <button
+                    id="signInTab"
+                    class="auth-tab"
+                    onclick="showSignIn()"
+                >
+                    Sign In
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 SIGN UP FORM
+            ================================================== -->
+
+            <form id="signUpForm" class="auth-form" onsubmit="registerUser(event)">
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Full Name</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">👤</span>
+
+                            <input
+                                type="text"
+                                id="fullName"
+                                placeholder="Enter your full name"
+                            >
+                        </div>
+
+                        <small id="fullNameError" class="error-message"></small>
                     </div>
 
-                    <small id="emailError" class="error-message"></small>
+
+                    <div class="form-group">
+                        <label>Username</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">@</span>
+
+                            <input
+                                type="text"
+                                id="username"
+                                placeholder="Choose a username"
+                            >
+                        </div>
+
+                        <small id="usernameError" class="error-message"></small>
+                    </div>
+
                 </div>
 
-                <div class="input-group">
-                    <label for="loginPassword">Password</label>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Email</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">✉</span>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter your email"
+                            >
+                        </div>
+
+                        <small id="emailError" class="error-message"></small>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Mobile Number</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">☎</span>
+
+                            <input
+                                type="tel"
+                                id="mobile"
+                                placeholder="Enter your mobile number"
+                            >
+                        </div>
+
+                        <small id="mobileError" class="error-message"></small>
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Password</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">🔒</span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Enter password"
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword('password', this)"
+                            >
+                                👁
+                            </button>
+                        </div>
+
+                        <small id="passwordError" class="error-message"></small>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">🔐</span>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="Re-enter password"
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword('confirmPassword', this)"
+                            >
+                                👁
+                            </button>
+                        </div>
+
+                        <small id="confirmPasswordError" class="error-message"></small>
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Skill / Area of Interest</label>
+
+                        <div class="input-wrapper select-wrapper">
+                            <span class="input-icon">✦</span>
+
+                            <select id="skillInterest">
+                                <option value="">Select your skill</option>
+                                <option value="Java">Java</option>
+                                <option value="Python">Python</option>
+                                <option value="JavaScript">JavaScript</option>
+                                <option value="Web Development">Web Development</option>
+                                <option value="Data Structures">Data Structures</option>
+                                <option value="Machine Learning">Machine Learning</option>
+                                <option value="UI/UX Design">UI/UX Design</option>
+                                <option value="Communication">Communication</option>
+                                <option value="DevOps">DevOps</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <small id="skillInterestError" class="error-message"></small>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Proficiency Level</label>
+
+                        <div class="input-wrapper select-wrapper">
+                            <span class="input-icon">★</span>
+
+                            <select id="proficiency">
+                                <option value="">Select level</option>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select>
+                        </div>
+
+                        <small id="proficiencyError" class="error-message"></small>
+                    </div>
+
+                </div>
+
+
+                <div class="terms-row">
+
+                    <input type="checkbox" id="terms">
+
+                    <label for="terms">
+                        I agree to the
+                        <a href="#" onclick="return false;">Terms & Conditions</a>
+                        and
+                        <a href="#" onclick="return false;">Privacy Policy</a>
+                    </label>
+
+                </div>
+
+                <small id="termsError" class="error-message terms-error"></small>
+
+
+                <button type="submit" class="primary-button auth-submit">
+                    CREATE ACCOUNT
+                    <span>→</span>
+                </button>
+
+
+                <div class="auth-switch">
+
+                    Already have an account?
+
+                    <button
+                        type="button"
+                        onclick="showSignIn()"
+                    >
+                        Sign In
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- =================================================
+                 SIGN IN FORM
+            ================================================== -->
+
+            <form id="signInForm" class="auth-form hidden" onsubmit="loginUser(event)">
+
+                <div class="form-group">
+
+                    <label>Username or Email</label>
 
                     <div class="input-wrapper">
-                        <i class="fa-solid fa-lock"></i>
+
+                        <span class="input-icon">@</span>
+
+                        <input
+                            type="text"
+                            id="loginIdentifier"
+                            placeholder="Enter username or email"
+                        >
+
+                    </div>
+
+                    <small id="loginIdentifierError" class="error-message"></small>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Password</label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">🔒</span>
 
                         <input
                             type="password"
                             id="loginPassword"
-                            placeholder="Enter your password"
+                            placeholder="Enter password"
                         >
 
                         <button
                             type="button"
                             class="password-toggle"
-                            id="passwordToggle"
+                            onclick="togglePassword('loginPassword', this)"
                         >
-                            <i class="fa-regular fa-eye"></i>
+                            👁
                         </button>
+
                     </div>
 
-                    <small id="passwordError" class="error-message"></small>
+                    <small id="loginPasswordError" class="error-message"></small>
+
                 </div>
+
 
                 <div class="remember-row">
 
-                    <label class="remember-label">
+                    <label class="checkbox-label">
+
                         <input type="checkbox" id="rememberMe">
-                        <span>Remember me</span>
+
+                        <span>Remember Me</span>
+
                     </label>
 
                 </div>
 
-                <button type="submit" class="primary-button login-button">
-                    Login
+
+                <button type="submit" class="primary-button auth-submit">
+                    SIGN IN
+                    <span>→</span>
                 </button>
+
+
+                <div class="auth-switch">
+
+                    Don't have an account?
+
+                    <button
+                        type="button"
+                        onclick="showSignUp()"
+                    >
+                        Sign Up
+                    </button>
+
+                </div>
 
             </form>
 
-            <p class="signup-text">
-                Don't have an account?
-                <a href="#" id="signupLink">Sign up</a>
-            </p>
-
         </div>
-    </section>
+
+    </div>
+
+</section>
 
 
-    <!-- ================= MAIN APPLICATION ================= -->
+<!-- =========================================================
+     COMPLETE APPLICATION
+========================================================= -->
 
-    <div id="app" class="app hidden">
-
-        <!-- NAVBAR -->
-
-        <header class="navbar">
-
-            <div class="nav-container">
-
-                <a href="#" class="logo" id="logoHome">
-
-                    <div class="logo-icon">
-                        <i class="fa-solid fa-share-nodes"></i>
-                    </div>
-
-                    <span>SkillShare</span>
-
-                </a>
+<section id="appScreen" class="app-screen hidden">
 
 
-                <button class="mobile-menu-button" id="mobileMenuButton">
-                    <i class="fa-solid fa-bars"></i>
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <nav class="navbar">
+
+        <div class="navbar-inner">
+
+            <div class="nav-brand" onclick="showHome()">
+
+                <div class="logo-icon">S</div>
+
+                <span>
+                    Skill<span>Share</span>
+                </span>
+
+            </div>
+
+
+            <button
+                class="mobile-menu-button"
+                onclick="toggleMobileMenu()"
+            >
+                ☰
+            </button>
+
+
+            <div id="navLinks" class="nav-links">
+
+                <button
+                    id="homeNav"
+                    class="nav-link active"
+                    onclick="showHome()"
+                >
+                    <span>⌂</span>
+                    Home
+                </button>
+
+                <button
+                    id="exploreNav"
+                    class="nav-link"
+                    onclick="showSkillExchange()"
+                >
+                    <span>◈</span>
+                    Skill Exchange
+                </button>
+
+                <button
+                    id="addSkillNav"
+                    class="nav-link"
+                    onclick="showAddSkill()"
+                >
+                    <span>＋</span>
+                    Add Skill
+                </button>
+
+            </div>
+
+
+            <div class="nav-right">
+
+                <button
+                    class="theme-toggle"
+                    onclick="toggleTheme()"
+                    title="Toggle dark mode"
+                >
+                    <span id="themeIcon">🌙</span>
                 </button>
 
 
-                <nav class="nav-links" id="navLinks">
+                <div class="profile-menu-wrapper">
 
-                    <a href="#" class="nav-link active" data-page="homePage">
-                        <i class="fa-solid fa-house"></i>
-                        Home
-                    </a>
+                    <button
+                        class="profile-button"
+                        onclick="toggleProfileDropdown()"
+                    >
 
-                    <a href="#" class="nav-link" data-page="explorePage">
-                        <i class="fa-solid fa-compass"></i>
-                        Explore Skills
-                    </a>
-
-                    <a href="#" class="nav-link" data-page="addSkillPage">
-                        <i class="fa-solid fa-plus"></i>
-                        Add Skill
-                    </a>
-
-                </nav>
-
-
-                <div class="nav-right">
-
-                    <!-- Theme -->
-
-                    <button class="icon-button" id="themeToggle" title="Toggle theme">
-                        <i class="fa-solid fa-moon"></i>
-                    </button>
-
-
-                    <!-- Profile -->
-
-                    <div class="profile-menu-container">
-
-                        <button class="profile-button" id="profileButton">
-
-                            <div class="nav-avatar">
-                                S
-                            </div>
-
-                            <span>Spoorthy</span>
-
-                            <i class="fa-solid fa-chevron-down"></i>
-
-                        </button>
-
-
-                        <div class="profile-dropdown" id="profileDropdown">
-
-                            <button data-profile-action="profile">
-                                <i class="fa-regular fa-user"></i>
-                                My Profile
-                            </button>
-
-                            <button data-profile-action="connections">
-                                <i class="fa-solid fa-user-group"></i>
-                                My Connections
-                            </button>
-
-                            <button data-profile-action="logout" class="logout-option">
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                Logout
-                            </button>
-
+                        <div id="navAvatar" class="avatar">
+                            U
                         </div>
 
-                    </div>
+                        <span id="navUsername">
+                            User
+                        </span>
 
+                        <span class="dropdown-arrow">⌄</span>
 
-                    <button class="logout-button" id="logoutButton">
-                        Logout
                     </button>
+
+
+                    <div id="profileDropdown" class="profile-dropdown">
+
+                        <button onclick="showProfile()">
+                            <span>👤</span>
+                            My Profile
+                        </button>
+
+                        <button onclick="showProfile('connections')">
+                            <span>🤝</span>
+                            My Connections
+                        </button>
+
+                        <button onclick="showProfile('skills')">
+                            <span>✦</span>
+                            My Shared Skills
+                        </button>
+
+                        <div class="dropdown-divider"></div>
+
+                        <button
+                            class="logout-dropdown"
+                            onclick="logoutUser()"
+                        >
+                            <span>↪</span>
+                            Logout
+                        </button>
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </header>
+        </div>
 
+    </nav>
 
-        <!-- ================= PAGE CONTAINER ================= -->
 
-        <main class="page-container">
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
 
+    <main class="main-content">
 
-            <!-- ================= HOME PAGE ================= -->
 
-            <section id="homePage" class="page active-page">
+        <!-- =================================================
+             HOME
+        ================================================== -->
 
-                <div class="hero-section">
+        <section id="homeView" class="app-view">
 
-                    <div class="hero-content">
+            <div class="hero-section">
 
-                        <span class="hero-tag">
-                            <i class="fa-solid fa-sparkles"></i>
-                            Learn. Share. Grow.
-                        </span>
+                <div class="hero-content">
 
-                        <h1>
-                            Share What You Know.
-                            <span>Discover What You Can Learn.</span>
-                        </h1>
+                    <span class="hero-badge">
+                        ✦ YOUR LEARNING COMMUNITY
+                    </span>
 
-                        <p>
-                            Connect with people who have the skills you want
-                            to learn and share the skills you already know.
-                        </p>
-
-                        <div class="hero-buttons">
-
-                            <button class="primary-button" id="heroExploreButton">
-                                Explore Skills
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-
-                            <button class="secondary-button" id="heroAddSkillButton">
-                                <i class="fa-solid fa-plus"></i>
-                                Share Your Skill
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="hero-visual">
-
-                        <div class="visual-card main-visual-card">
-
-                            <div class="visual-header">
-
-                                <div class="mini-avatar purple">
-                                    R
-                                </div>
-
-                                <div>
-                                    <strong>Rahul</strong>
-                                    <span>Java Expert</span>
-                                </div>
-
-                                <i class="fa-solid fa-circle-check verified"></i>
-
-                            </div>
-
-
-                            <div class="visual-skill">
-
-                                <div class="visual-skill-icon">
-                                    <i class="fa-brands fa-java"></i>
-                                </div>
-
-                                <div>
-                                    <strong>Java Programming</strong>
-                                    <p>Intermediate</p>
-                                </div>
-
-                            </div>
-
-
-                            <div class="visual-progress">
-
-                                <div class="progress-text">
-                                    <span>Skill Match</span>
-                                    <strong>92%</strong>
-                                </div>
-
-                                <div class="progress-bar">
-                                    <span></span>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="floating-card floating-one">
-
-                            <i class="fa-solid fa-code"></i>
-
-                            <div>
-                                <strong>New Skill</strong>
-                                <span>JavaScript</span>
-                            </div>
-
-                        </div>
-
-
-                        <div class="floating-card floating-two">
-
-                            <i class="fa-solid fa-user-group"></i>
-
-                            <div>
-                                <strong>85+</strong>
-                                <span>Learners</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- STATISTICS -->
-
-                <div class="stats-grid">
-
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fa-solid fa-lightbulb"></i>
-                        </div>
-                        <div>
-                            <strong>120+</strong>
-                            <span>Skills Shared</span>
-                        </div>
-                    </div>
-
-
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fa-solid fa-users"></i>
-                        </div>
-                        <div>
-                            <strong>85+</strong>
-                            <span>Learners</span>
-                        </div>
-                    </div>
-
-
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fa-solid fa-graduation-cap"></i>
-                        </div>
-                        <div>
-                            <strong>60+</strong>
-                            <span>Skill Experts</span>
-                        </div>
-                    </div>
-
-
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fa-solid fa-layer-group"></i>
-                        </div>
-                        <div>
-                            <strong>15+</strong>
-                            <span>Categories</span>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <!-- POPULAR SKILLS -->
-
-                <div class="section-heading">
-
-                    <div>
-                        <span class="section-label">DISCOVER</span>
-                        <h2>Popular Skills</h2>
-                        <p>Explore skills people are sharing right now.</p>
-                    </div>
-
-                    <button class="text-button" id="homeExploreAll">
-                        Explore All Skills
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-
-                </div>
-
-
-                <div id="homeSkillsGrid" class="skills-grid home-skills-grid">
-                    <!-- Filled by JavaScript -->
-                </div>
-
-            </section>
-
-
-            <!-- ================= EXPLORE PAGE ================= -->
-
-            <section id="explorePage" class="page hidden-page">
-
-                <div class="page-header">
-
-                    <div>
-                        <span class="section-label">DISCOVER</span>
-                        <h1>Explore Skills</h1>
-                        <p>
-                            Find people who can help you learn something new.
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="explore-controls">
-
-                    <div class="large-search">
-
-                        <i class="fa-solid fa-magnifying-glass"></i>
-
-                        <input
-                            type="text"
-                            id="searchInput"
-                            placeholder="Search skills, people or topics..."
-                        >
-
-                        <button id="clearSearch" class="clear-search">
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
-
-                    </div>
-
-
-                    <div class="category-buttons" id="categoryButtons">
-
-                        <button class="category-filter active" data-category="All">
-                            All
-                        </button>
-
-                        <button class="category-filter" data-category="Programming">
-                            Programming
-                        </button>
-
-                        <button class="category-filter" data-category="Web Development">
-                            Web Development
-                        </button>
-
-                        <button class="category-filter" data-category="Data Science">
-                            Data Science
-                        </button>
-
-                        <button class="category-filter" data-category="Design">
-                            Design
-                        </button>
-
-                        <button class="category-filter" data-category="Communication">
-                            Communication
-                        </button>
-
-                        <button class="category-filter" data-category="Business">
-                            Business
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div id="exploreSkillsGrid" class="skills-grid">
-                    <!-- Filled by JavaScript -->
-                </div>
-
-
-                <div id="emptySearchState" class="empty-state hidden">
-
-                    <div class="empty-icon">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-
-                    <h3>No skills found 🔍</h3>
+                    <h1>
+                        Welcome to SkillShare,
+                        <span id="heroUsername">User</span>!
+                    </h1>
 
                     <p>
-                        Try searching for another skill.
+                        Share what you know. Learn something new.
+                        Connect with people who share your interests.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <button
+                            class="primary-button"
+                            onclick="showSkillExchange()"
+                        >
+                            Explore Skills
+                            <span>→</span>
+                        </button>
+
+                        <button
+                            class="secondary-button"
+                            onclick="showAddSkill()"
+                        >
+                            <span>＋</span>
+                            Share Your Skill
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-visual">
+
+                    <div class="visual-orbit orbit-one"></div>
+                    <div class="visual-orbit orbit-two"></div>
+
+                    <div class="hero-center-card">
+
+                        <div class="hero-main-icon">
+                            ✦
+                        </div>
+
+                        <strong>
+                            Learn & Share
+                        </strong>
+
+                        <span>
+                            Together
+                        </span>
+
+                    </div>
+
+                    <div class="floating-card floating-card-one">
+                        <span>☕</span>
+                        <strong>Java</strong>
+                    </div>
+
+                    <div class="floating-card floating-card-two">
+                        <span>🎨</span>
+                        <strong>Design</strong>
+                    </div>
+
+                    <div class="floating-card floating-card-three">
+                        <span>🐍</span>
+                        <strong>Python</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        ◈
+                    </div>
+
+                    <div>
+                        <span>Available Skills</span>
+                        <strong id="availableSkillsStat">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        ◎
+                    </div>
+
+                    <div>
+                        <span>Active Learners</span>
+                        <strong id="activeLearnersStat">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon pink">
+                        ✦
+                    </div>
+
+                    <div>
+                        <span>Skills Shared</span>
+                        <strong id="skillsSharedStat">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        🤝
+                    </div>
+
+                    <div>
+                        <span>My Connections</span>
+                        <strong id="connectionsStat">0</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FEATURED -->
+
+            <div class="section-header">
+
+                <div>
+                    <span class="section-label">DISCOVER</span>
+                    <h2>Featured Skills</h2>
+                    <p>Explore skills shared by our learning community.</p>
+                </div>
+
+                <button
+                    class="text-button"
+                    onclick="showSkillExchange()"
+                >
+                    View All
+                    →
+                </button>
+
+            </div>
+
+
+            <div id="featuredSkills" class="skills-grid"></div>
+
+        </section>
+
+
+        <!-- =================================================
+             SKILL EXCHANGE
+        ================================================== -->
+
+        <section id="skillExchangeView" class="app-view hidden">
+
+            <div class="page-header">
+
+                <div>
+
+                    <span class="section-label">
+                        LEARNING COMMUNITY
+                    </span>
+
+                    <h1>Skill Exchange</h1>
+
+                    <p>
+                        Discover people who can teach you something new.
                     </p>
 
                 </div>
 
-            </section>
+                <div class="page-header-icon">
+                    ◈
+                </div>
+
+            </div>
 
 
-            <!-- ================= ADD SKILL PAGE ================= -->
+            <div class="search-section">
 
-            <section id="addSkillPage" class="page hidden-page">
+                <div class="search-box">
 
-                <div class="page-header">
+                    <span>⌕</span>
 
-                    <div>
-                        <span class="section-label">CONTRIBUTE</span>
-                        <h1>Share Your Skill</h1>
-                        <p>
-                            Teach what you know and help someone grow.
-                        </p>
+                    <input
+                        type="text"
+                        id="skillSearch"
+                        placeholder="Search for a skill..."
+                        oninput="searchSkills()"
+                    >
+
+                    <button
+                        id="clearSearch"
+                        class="clear-search"
+                        onclick="clearSearch()"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="category-section">
+
+                <button
+                    class="category-button active"
+                    data-category="All"
+                    onclick="filterCategory('All', this)"
+                >
+                    All
+                </button>
+
+                <button
+                    class="category-button"
+                    data-category="Programming"
+                    onclick="filterCategory('Programming', this)"
+                >
+                    Programming
+                </button>
+
+                <button
+                    class="category-button"
+                    data-category="Web Development"
+                    onclick="filterCategory('Web Development', this)"
+                >
+                    Web Development
+                </button>
+
+                <button
+                    class="category-button"
+                    data-category="Design"
+                    onclick="filterCategory('Design', this)"
+                >
+                    Design
+                </button>
+
+                <button
+                    class="category-button"
+                    data-category="Data Science"
+                    onclick="filterCategory('Data Science', this)"
+                >
+                    Data Science
+                </button>
+
+                <button
+                    class="category-button"
+                    data-category="Communication"
+                    onclick="filterCategory('Communication', this)"
+                >
+                    Communication
+                </button>
+
+                <button
+                    class="category-button"
+                    data-category="Other"
+                    onclick="filterCategory('Other', this)"
+                >
+                    Other
+                </button>
+
+            </div>
+
+
+            <div class="results-heading">
+
+                <h2>Available Skills</h2>
+
+                <span id="resultsCount">
+                    0 skills
+                </span>
+
+            </div>
+
+
+            <div id="allSkillsGrid" class="skills-grid"></div>
+
+        </section>
+
+
+        <!-- =================================================
+             ADD SKILL
+        ================================================== -->
+
+        <section id="addSkillView" class="app-view hidden">
+
+            <div class="page-header">
+
+                <div>
+
+                    <span class="section-label">
+                        CONTRIBUTE
+                    </span>
+
+                    <h1>Share Your Skill</h1>
+
+                    <p>
+                        Help others learn by sharing what you know.
+                    </p>
+
+                </div>
+
+                <div class="page-header-icon">
+                    ✦
+                </div>
+
+            </div>
+
+
+            <div class="add-skill-layout">
+
+                <div class="add-skill-info">
+
+                    <div class="add-info-icon">
+                        💡
+                    </div>
+
+                    <h2>
+                        What can you teach?
+                    </h2>
+
+                    <p>
+                        Share a skill that you are comfortable
+                        teaching to other learners.
+                    </p>
+
+
+                    <div class="tip-list">
+
+                        <div class="tip-item">
+                            <span>✓</span>
+                            Choose a clear skill name.
+                        </div>
+
+                        <div class="tip-item">
+                            <span>✓</span>
+                            Select your actual proficiency.
+                        </div>
+
+                        <div class="tip-item">
+                            <span>✓</span>
+                            Add a helpful description.
+                        </div>
+
                     </div>
 
                 </div>
 
 
-                <div class="form-wrapper">
+                <div class="form-card">
 
-                    <div class="form-card">
+                    <form onsubmit="addSkill(event)">
 
-                        <div class="form-card-header">
+                        <div class="form-group">
 
-                            <div class="form-icon">
-                                <i class="fa-solid fa-lightbulb"></i>
+                            <label>
+                                Skill Name
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <span class="input-icon">✦</span>
+
+                                <input
+                                    type="text"
+                                    id="newSkillName"
+                                    placeholder="Enter skill name"
+                                >
+
                             </div>
 
-                            <div>
-                                <h2>Add a new skill</h2>
-                                <p>
-                                    Tell the community what you can teach.
-                                </p>
-                            </div>
+                            <small
+                                id="newSkillNameError"
+                                class="error-message"
+                            ></small>
 
                         </div>
 
 
-                        <form id="addSkillForm">
+                        <div class="form-row">
 
-                            <div class="form-row">
+                            <div class="form-group">
 
-                                <div class="input-group">
-
-                                    <label for="skillPersonName">
-                                        Your Name
-                                    </label>
-
-                                    <input
-                                        type="text"
-                                        id="skillPersonName"
-                                        placeholder="Enter your name"
-                                    >
-
-                                    <small class="form-error" id="nameError"></small>
-
-                                </div>
-
-
-                                <div class="input-group">
-
-                                    <label for="skillName">
-                                        Skill Name
-                                    </label>
-
-                                    <input
-                                        type="text"
-                                        id="skillName"
-                                        placeholder="e.g. Python"
-                                    >
-
-                                    <small class="form-error" id="skillError"></small>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="input-group">
-
-                                <label for="skillCategory">
+                                <label>
                                     Category
+                                    <span>*</span>
                                 </label>
 
-                                <select id="skillCategory">
+                                <div class="input-wrapper select-wrapper">
 
-                                    <option value="">
-                                        Select a category
-                                    </option>
+                                    <span class="input-icon">◈</span>
 
-                                    <option value="Programming">
-                                        Programming
-                                    </option>
+                                    <select id="newSkillCategory">
 
-                                    <option value="Web Development">
-                                        Web Development
-                                    </option>
+                                        <option value="">
+                                            Select category
+                                        </option>
 
-                                    <option value="Data Science">
-                                        Data Science
-                                    </option>
+                                        <option value="Programming">
+                                            Programming
+                                        </option>
 
-                                    <option value="Design">
-                                        Design
-                                    </option>
+                                        <option value="Web Development">
+                                            Web Development
+                                        </option>
 
-                                    <option value="Communication">
-                                        Communication
-                                    </option>
+                                        <option value="Design">
+                                            Design
+                                        </option>
 
-                                    <option value="Business">
-                                        Business
-                                    </option>
+                                        <option value="Data Science">
+                                            Data Science
+                                        </option>
 
-                                </select>
+                                        <option value="Communication">
+                                            Communication
+                                        </option>
 
-                                <small class="form-error" id="categoryError"></small>
+                                        <option value="Other">
+                                            Other
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                                <small
+                                    id="newSkillCategoryError"
+                                    class="error-message"
+                                ></small>
 
                             </div>
 
 
-                            <div class="input-group">
+                            <div class="form-group">
 
-                                <label for="skillDescription">
-                                    Description
-                                </label>
-
-                                <textarea
-                                    id="skillDescription"
-                                    rows="4"
-                                    placeholder="Briefly describe what you can teach..."
-                                ></textarea>
-
-                                <small class="form-error" id="descriptionError"></small>
-
-                            </div>
-
-
-                            <div class="input-group">
-
-                                <label for="skillLevel">
+                                <label>
                                     Proficiency Level
+                                    <span>*</span>
                                 </label>
 
-                                <select id="skillLevel">
+                                <div class="input-wrapper select-wrapper">
 
-                                    <option value="">
-                                        Select proficiency
-                                    </option>
+                                    <span class="input-icon">★</span>
 
-                                    <option value="Beginner">
-                                        Beginner
-                                    </option>
+                                    <select id="newSkillLevel">
 
-                                    <option value="Intermediate">
-                                        Intermediate
-                                    </option>
+                                        <option value="">
+                                            Select level
+                                        </option>
 
-                                    <option value="Advanced">
-                                        Advanced
-                                    </option>
+                                        <option value="Beginner">
+                                            Beginner
+                                        </option>
 
-                                </select>
+                                        <option value="Intermediate">
+                                            Intermediate
+                                        </option>
 
-                                <small class="form-error" id="levelError"></small>
+                                        <option value="Advanced">
+                                            Advanced
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                                <small
+                                    id="newSkillLevelError"
+                                    class="error-message"
+                                ></small>
 
                             </div>
 
+                        </div>
 
-                            <button type="submit" class="primary-button add-button">
 
-                                <i class="fa-solid fa-plus"></i>
+                        <div class="form-group">
 
-                                Add Skill
+                            <label>
+                                Description
+                                <span>*</span>
+                            </label>
 
-                            </button>
+                            <textarea
+                                id="newSkillDescription"
+                                rows="5"
+                                placeholder="Tell others about your skill..."
+                            ></textarea>
 
-                        </form>
+                            <small
+                                id="newSkillDescriptionError"
+                                class="error-message"
+                            ></small>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="primary-button full-button"
+                        >
+                            SHARE SKILL
+                            <span>→</span>
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROFILE
+        ================================================== -->
+
+        <section id="profileView" class="app-view hidden">
+
+            <div class="profile-cover">
+
+                <div class="profile-cover-pattern"></div>
+
+                <div class="profile-main">
+
+                    <div id="profileAvatar" class="profile-avatar">
+                        U
+                    </div>
+
+                    <div class="profile-title">
+
+                        <span id="profileUsername">
+                            @username
+                        </span>
+
+                        <h1 id="profileFullName">
+                            User
+                        </h1>
+
+                        <p>
+                            SkillShare learner
+                        </p>
 
                     </div>
 
                 </div>
 
-            </section>
+            </div>
 
 
-            <!-- ================= PROFILE PAGE ================= -->
+            <div class="profile-grid">
 
-            <section id="profilePage" class="page hidden-page">
 
-                <div class="profile-header-card">
+                <!-- PROFILE INFORMATION -->
 
-                    <div class="profile-avatar-large">
-                        S
-                    </div>
+                <div class="profile-info-card">
 
-                    <div class="profile-main-info">
+                    <div class="card-title">
 
-                        <span class="section-label">MY PROFILE</span>
-
-                        <h1>Spoorthy</h1>
-
-                        <p>
-                            <i class="fa-regular fa-envelope"></i>
-                            <span id="profileEmail">
-                                spoorthy@example.com
+                        <div>
+                            <span class="section-label">
+                                ACCOUNT
                             </span>
-                        </p>
 
-                        <p class="profile-bio">
-                            Learning, sharing and growing together.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- PROFILE STATS -->
-
-                <div class="profile-stats">
-
-                    <div class="profile-stat-card">
-
-                        <div class="profile-stat-icon">
-                            <i class="fa-solid fa-lightbulb"></i>
+                            <h2>Personal Information</h2>
                         </div>
 
-                        <div>
-                            <strong id="sharedSkillsCount">0</strong>
-                            <span>Skills Shared</span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="profile-stat-card">
-
-                        <div class="profile-stat-icon">
-                            <i class="fa-solid fa-book-open"></i>
-                        </div>
-
-                        <div>
-                            <strong>0</strong>
-                            <span>Skills Learning</span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="profile-stat-card">
-
-                        <div class="profile-stat-icon">
-                            <i class="fa-solid fa-user-group"></i>
-                        </div>
-
-                        <div>
-                            <strong id="connectionCount">0</strong>
-                            <span>Connections</span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- SHARED SKILLS -->
-
-                <div class="profile-section">
-
-                    <div class="section-heading">
-
-                        <div>
-                            <span class="section-label">YOUR CONTRIBUTIONS</span>
-                            <h2>My Shared Skills</h2>
-                        </div>
-
-                        <button class="text-button" id="profileAddSkill">
-                            Share Your Skill
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
-
-                    </div>
-
-
-                    <div id="mySkillsGrid" class="skills-grid">
-                        <!-- Filled by JavaScript -->
-                    </div>
-
-                    <div id="noMySkills" class="profile-empty hidden">
-
-                        <div>
-                            <i class="fa-regular fa-lightbulb"></i>
-                        </div>
-
-                        <h3>You haven't shared any skills yet.</h3>
-
-                        <p>
-                            Share your knowledge and help someone learn.
-                        </p>
-
-                        <button class="primary-button" id="firstSkillButton">
-                            Share Your First Skill
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- CONNECTIONS -->
-
-                <div class="profile-section" id="connectionsSection">
-
-                    <div class="section-heading">
-
-                        <div>
-                            <span class="section-label">YOUR NETWORK</span>
-                            <h2>My Connections</h2>
-                            <p>People you've connected with.</p>
-                        </div>
-
-                        <span class="connection-counter" id="connectionBadge">
-                            0 Connections
+                        <span class="card-title-icon">
+                            👤
                         </span>
 
                     </div>
 
 
-                    <div id="connectionsGrid" class="connections-grid">
-                        <!-- Filled by JavaScript -->
-                    </div>
+                    <div class="profile-details">
 
+                        <div class="profile-detail">
 
-                    <div id="noConnections" class="profile-empty hidden">
+                            <span>Full Name</span>
 
-                        <div>
-                            <i class="fa-solid fa-user-group"></i>
+                            <strong id="profileNameDetail">
+                                —
+                            </strong>
+
                         </div>
 
-                        <h3>No connections yet 🤝</h3>
 
-                        <p>
-                            Explore skills and connect with people
-                            who share your interests.
-                        </p>
+                        <div class="profile-detail">
 
-                        <button class="primary-button" id="connectionExploreButton">
-                            Explore Skills
-                        </button>
+                            <span>Username</span>
+
+                            <strong id="profileUsernameDetail">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-detail">
+
+                            <span>Email</span>
+
+                            <strong id="profileEmailDetail">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-detail">
+
+                            <span>Mobile Number</span>
+
+                            <strong id="profileMobileDetail">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-detail">
+
+                            <span>Skill Interest</span>
+
+                            <strong id="profileInterestDetail">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-detail">
+
+                            <span>Proficiency Level</span>
+
+                            <strong id="profileLevelDetail">
+                                —
+                            </strong>
+
+                        </div>
 
                     </div>
 
                 </div>
 
-            </section>
 
-        </main>
+                <!-- MY CONNECTIONS -->
+
+                <div
+                    id="connectionsSection"
+                    class="profile-section-card"
+                >
+
+                    <div class="card-title">
+
+                        <div>
+                            <span class="section-label">
+                                NETWORK
+                            </span>
+
+                            <h2>My Connections</h2>
+                        </div>
+
+                        <span id="connectionCountBadge" class="count-badge">
+                            0
+                        </span>
+
+                    </div>
+
+                    <div id="connectionsList" class="connections-list"></div>
+
+                </div>
 
 
-        <!-- ================= TOAST ================= -->
+                <!-- MY SHARED SKILLS -->
 
-        <div id="toast" class="toast">
+                <div
+                    id="mySkillsSection"
+                    class="profile-section-card full-profile-card"
+                >
 
-            <div class="toast-icon">
-                <i class="fa-solid fa-check"></i>
+                    <div class="card-title">
+
+                        <div>
+                            <span class="section-label">
+                                CONTRIBUTIONS
+                            </span>
+
+                            <h2>My Shared Skills</h2>
+                        </div>
+
+                        <button
+                            class="small-primary-button"
+                            onclick="showAddSkill()"
+                        >
+                            + Add Skill
+                        </button>
+
+                    </div>
+
+                    <div id="mySkillsList" class="my-skills-list"></div>
+
+                </div>
+
             </div>
 
-            <div>
-                <strong id="toastTitle">Success</strong>
-                <span id="toastMessage"></span>
-            </div>
+        </section>
 
-            <button id="closeToast">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+    </main>
 
-        </div>
+</section>
 
 
-        <!-- FOOTER -->
-
-        <footer class="footer">
-
-            <p>
-                © 2026 SkillShare. Share knowledge. Grow together.
-            </p>
-
-        </footer>
-
-    </div>
-
-
-    <!-- JavaScript -->
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
