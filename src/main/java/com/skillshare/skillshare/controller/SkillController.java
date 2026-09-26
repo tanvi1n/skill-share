@@ -22,7 +22,7 @@ public class SkillController {
     }
 
     @GetMapping("/{id}")
-    public Skill getSkill(@PathVariable Long id) {
+    public Skill getSkill(@PathVariable String id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -32,13 +32,13 @@ public class SkillController {
     }
 
     @PutMapping("/{id}")
-    public Skill updateSkill(@PathVariable Long id, @RequestBody Skill skill) {
+    public Skill updateSkill(@PathVariable String id, @RequestBody Skill skill) {
         skill.setId(id);
         return repository.save(skill);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteSkill(@PathVariable Long id) {
+    public void deleteSkill(@PathVariable String id) {
         repository.deleteById(id);
     }
 }

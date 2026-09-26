@@ -1,8 +1,7 @@
 package com.skillshare.skillshare.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.skillshare.skillshare.model.Skill;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface SkillRepository extends JpaRepository<Skill, Long> {
-
+public interface SkillRepository extends MongoRepository<Skill, String> {
 }
